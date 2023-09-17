@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+        <FrameLayout
+            android:id="@+id/detail_fl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true">
+        </FrameLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/detail_ll"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/detailImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/detail_ll"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            tools:text="test titolo"/>
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/owner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            tools:text="test owner"/>
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/owner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            tools:text="test location"/>
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            tools:text="test date"/>
+        <com.google.android.material.button.MaterialButton
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="50dp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/backButton"
+            android:text="CHIUDI"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
