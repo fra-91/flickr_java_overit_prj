@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://api.flickr.com/"; //    services/rest
+    private static final String BASE_URL = "https://api.flickr.com/";
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {

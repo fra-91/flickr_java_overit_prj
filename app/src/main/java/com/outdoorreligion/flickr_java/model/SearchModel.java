@@ -48,19 +48,15 @@ public class SearchModel implements SearchContract.Model {
                     if(apiResponse != null && apiResponse.getPhotos() != null && apiResponse.getPhotos().getPhotos() != null) {
                         photos = apiResponse.getPhotos().getPhotos();
                         Log.d("SearchModel", "searchApi succesful");
-                        //onFinishedListener.onFinished(photos);
                         callInfoApi(onFinishedListener);
                     }
-                    // Ora puoi gestire la lista di foto ottenuta dalla risposta
                 } else {
-                    // Gestire errori qui
                 }
             }
 
             @Override
             public void onFailure(Call<SearchResponse> call, Throwable t) {
                 Log.d("SearchModel", "fail "+t.getMessage());
-                // Gestire errori di rete qui
             }
         });
     }
@@ -89,16 +85,13 @@ public class SearchModel implements SearchContract.Model {
                             onFinishedListener.onFinished(photos, currentPhoto == photosNumber);
                             Log.d("SearchModel", "searchApi succesful");
                         }
-                        // Ora puoi gestire la lista di foto ottenuta dalla risposta
                     } else {
-                        // Gestire errori qui
                     }
                 }
 
                 @Override
                 public void onFailure(Call<InfoResponse> call, Throwable t) {
                     Log.d("SearchModel", "fail "+t.getMessage());
-                    // Gestire errori di rete qui
                 }
             });
         }

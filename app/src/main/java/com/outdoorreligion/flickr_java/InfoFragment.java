@@ -101,9 +101,6 @@ public class InfoFragment extends Fragment implements InfoContract.View {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //mInfoPresenter = new InfoPresenter(this, new InfoModel());
-        //mInfoPresenter.getInfoFromImageId(mImageId);
-
         FrameLayout fl = view.findViewById(R.id.detail_fl);
         fl.setBackgroundColor(getResources().getColor(R.color.white));
 

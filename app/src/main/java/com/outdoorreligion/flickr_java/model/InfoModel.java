@@ -14,7 +14,6 @@ import retrofit2.Retrofit;
 
 public class InfoModel implements InfoContract.Model  {
 
-    private String METHOD_URL = "flickr.photos.getInfo";
     private FlickrApi infoApi;
 
     public void callInfoApi(String id, InfoContract.Model.OnFinishedListener onFinishedListener) {
@@ -39,16 +38,13 @@ public class InfoModel implements InfoContract.Model  {
                     InfoResponse infoResponse = response.body();
                     if(infoResponse != null)
                         onFinishedListener.onFinished(infoResponse.getPhotoInfo());
-                    // Puoi ora lavorare con i dati ottenuti dalla chiamata API utilizzando la CALLBACK
                 } else {
-                    // Gestire errori di rete o errori nella risposta utilizzando la CALLBACK
                 }
             }
 
             @Override
             public void onFailure(Call<InfoResponse> call, Throwable t) {
                 Log.d("InfoRepository", "Error: "+t.getMessage());
-                // Gestire eventuali errori di connessione utilizzando la CALLBACK
             }
         });
     }

@@ -74,7 +74,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     private void loadData(String text) {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Caricamento in corso...");
-        progressDialog.setCancelable(false); // Per impedire che il dialogo venga chiuso premendo il pulsante indietro
+        progressDialog.setCancelable(false);
 
         progressDialog.show();
 
