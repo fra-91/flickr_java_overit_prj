@@ -36,6 +36,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     private SearchAdapter adapter;
     private List<String> dataList;
     private ProgressDialog progressDialog;
+    private String textToSearch = "";
 
 
     @Nullable
@@ -57,10 +58,13 @@ public class SearchFragment extends Fragment implements SearchContract.View {
         TextInputEditText editText = view.findViewById(R.id.search_input_text);
         searchInputLayout.setEndIconOnClickListener(v -> {
             editText.setText("");
+            textToSearch = "";
         });
         searchInputLayout.setStartIconOnClickListener(v -> {
             if(editText.getText() != null) {
-                loadData(editText.getText().toString());
+                textToSearch = editText.getText().toString();
+                if(!textToSearch.isEmpty() && !textToSearch.isEmpty())
+                    loadData(textToSearch);
             }
             else
                 Log.d("SearchFragment", "text is null");
