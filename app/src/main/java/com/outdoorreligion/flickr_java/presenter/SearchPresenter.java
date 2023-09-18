@@ -20,7 +20,7 @@ public class SearchPresenter implements SearchContract.Presenter, SearchContract
     }
 
     @Override
-    public void onFinished(List<Photo> photos) {
-        mView.showResults(photos);
+    public void onFinished(List<Photo> photos, boolean lastItem) {
+        mView.showResults(photos, lastItem);
     }
 }

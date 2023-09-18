@@ -11,6 +11,7 @@ import com.outdoorreligion.flickr_java.model.search.SearchResponse;
 import com.outdoorreligion.flickr_java.presenter.SearchContract;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -21,6 +22,8 @@ import retrofit2.Retrofit;
 public class SearchModel implements SearchContract.Model {
     private FlickrApi flickrApi;
     private List<Photo> photos = new ArrayList<>();
+    private int photosNumber = 0;
+    private int currentPhoto = 0;
 
     @Override
     public void callSearchApi(String text, OnFinishedListener onFinishedListener) {
@@ -42,7 +45,7 @@ public class SearchModel implements SearchContract.Model {
                 Log.d("SearchModel", "searchApi responded");
                 if (response.isSuccessful()) {
                     SearchResponse apiResponse = response.body();
-                    if(apiResponse != null) {
+                    if(apiResponse != null && apiResponse.getPhotos() != null && apiResponse.getPhotos().getPhotos() != null) {
                         photos = apiResponse.getPhotos().getPhotos();
                         Log.d("SearchModel", "searchApi succesful");
                         //onFinishedListener.onFinished(photos);
@@ -63,6 +66,7 @@ public class SearchModel implements SearchContract.Model {
     }
 
     private void callInfoApi(OnFinishedListener onFinishedListener) {
+        photosNumber = photos.size();
         for (Photo p: photos) {
             Call<InfoResponse> infoCall = flickrApi.getInfo(
                     FlickrApi.GETINFO_METHOD,
@@ -76,12 +80,13 @@ public class SearchModel implements SearchContract.Model {
                 @Override
                 public void onResponse(Call<InfoResponse> call, Response<InfoResponse> response) {
                     Log.d("SearchModel", "searchApi responded");
+                    currentPhoto++;
                     if (response.isSuccessful()) {
                         InfoResponse apiResponse = response.body();
                         if(apiResponse != null) {
                             PhotoInfo photoInfo = apiResponse.getPhotoInfo();
                             p.setPhotoInfo(photoInfo);
-                            onFinishedListener.onFinished(photos);
+                            onFinishedListener.onFinished(photos, currentPhoto == photosNumber);
                             Log.d("SearchModel", "searchApi succesful");
                         }
                         // Ora puoi gestire la lista di foto ottenuta dalla risposta

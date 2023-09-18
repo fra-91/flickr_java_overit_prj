@@ -1,5 +1,6 @@
 package com.outdoorreligion.flickr_java;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     private RecyclerView recyclerView;
     private SearchAdapter adapter;
     private List<String> dataList;
+    private ProgressDialog progressDialog;
 
 
     @Nullable
@@ -58,7 +60,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
         });
         searchInputLayout.setStartIconOnClickListener(v -> {
             if(editText.getText() != null) {
-                mSearchPresenter.onSearchClicked(editText.getText().toString());
+                loadData(editText.getText().toString());
             }
             else
                 Log.d("SearchFragment", "text is null");
@@ -69,15 +71,27 @@ public class SearchFragment extends Fragment implements SearchContract.View {
         recyclerView.setLayoutManager(layoutManager);
     }
 
+    private void loadData(String text) {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Caricamento in corso...");
+        progressDialog.setCancelable(false); // Per impedire che il dialogo venga chiuso premendo il pulsante indietro
+
+        progressDialog.show();
+
+        mSearchPresenter.onSearchClicked(text);
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    public void showResults(List<Photo> photos) {
+    public void showResults(List<Photo> photos, boolean lastItem) {
         Log.d("SearchFragment", "RESPONSE AVAILABLE");
         if(getActivity() != null) {
+            if(lastItem)
+                progressDialog.dismiss();
             adapter = new SearchAdapter(photos, getActivity().getSupportFragmentManager(), getContext());
             recyclerView.setAdapter(adapter);
         }

@@ -7,7 +7,7 @@ import java.util.List;
 public interface SearchContract {
 
     public interface View {
-        public void showResults(List<Photo> photos);
+        public void showResults(List<Photo> photos, boolean lastItem);
     }
 
     public interface Presenter {
@@ -16,13 +16,8 @@ public interface SearchContract {
 
     public interface Model {
         interface OnFinishedListener {
-            void onFinished(List<Photo> photos);
+            void onFinished(List<Photo> photos, boolean lastItem);
         }
         public void callSearchApi(String text, SearchContract.Model.OnFinishedListener onFinishedListener);
     }
-
-    public interface Activity {
-
-    }
-
 }
